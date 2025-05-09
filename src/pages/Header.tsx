@@ -16,7 +16,7 @@ const Header = () => {
   const [megaMenuSubItemsOpen, setMegaMenuSubItemsOpen] = useState("");
 
   return (
-    <nav className="flex items-center justify-between w-full relative">
+    <nav className="flex items-center justify-between w-11/12 mx-auto relative">
       {/* logo */}
       <img
         src="https://i.ibb.co/0BZfPq6/darklogo.png"
