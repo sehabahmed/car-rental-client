@@ -1,15 +1,25 @@
 import { Form, Select } from "antd";
 import { Controller } from "react-hook-form";
 
-type TPHSelectProps = {
+type TCRSelectProps = {
   label: string;
   name: string;
   options: { value: string; label: string; disabled?: boolean }[] | undefined;
   disabled?: boolean;
   mode?: "multiple" | undefined;
+  placeholder?: string;
+  className?: string;
 };
 
-const CRSelect = ({ label, name, options, disabled, mode }: TPHSelectProps) => (
+const CRSelect = ({
+  label,
+  name,
+  options,
+  disabled,
+  mode,
+  placeholder,
+  className,
+}: TCRSelectProps) => (
   <Controller
     name={name}
     render={({ field, fieldState: { error } }) => (
@@ -21,8 +31,10 @@ const CRSelect = ({ label, name, options, disabled, mode }: TPHSelectProps) => (
           options={options}
           disabled={disabled}
           size="large"
+          className={className}
+          placeholder={placeholder}
         />
-        {error && <small style={{color: 'red'}}>{error.message}</small>}
+        {error && <small style={{ color: "red" }}>{error.message}</small>}
       </Form.Item>
     )}
   />

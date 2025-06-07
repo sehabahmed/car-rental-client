@@ -2,9 +2,9 @@ import { Form, Input } from "antd";
 import { Controller } from "react-hook-form";
 
 type TInputProps = {
-  type: string;
+  type?: string;
   name: string;
-  label: string;
+  label?: string;
   placeholder?: string;
   className?: string;
   disabled?: boolean;
