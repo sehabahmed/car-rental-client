@@ -41,10 +41,6 @@ const Header = () => {
           All Cars
         </li>
         </Link>
-        <li className="flex items-center hover:text-[#3B9DF8] group gap-[5px] cursor-pointer">
-          <BiSupport className="text-[1.1rem] group-hover:text-[#3B9DF8] text-gray-600" />
-          Support
-        </li>
       </ul>
 
       {/* user account */}
@@ -103,7 +99,7 @@ const Header = () => {
 
         <CiMenuFries
           onClick={() => setMobileSidebarOpen(!mobileSidebarOpen)}
-          className="text-[1.8rem] text-[#424242]c cursor-pointer md:hidden flex"
+          className="text-[1.8rem]  text-[#424242] cursor-pointer md:hidden flex"
         />
       </div>
 
@@ -116,84 +112,20 @@ const Header = () => {
         } md:hidden bg-white p-4 text-center absolute top-[55px] right-0 sm:w-[300px] w-full rounded-md transition-all duration-300`}
       >
         <ul className="items-start gap-[20px] text-[1rem] text-gray-600 flex flex-col">
-          <li
-            onClick={() => setIsMegaMenuCollapse(!isMegaMenuCollapse)}
-            className="hover:text-[#3B9DF8] group transition-all duration-500 cursor-pointer capitalize flex items-center gap-[10px]"
-          >
-            Products
-            <IoIosArrowDown
-              className={`${
-                isMegaMenuCollapse ? "rotate-0" : "rotate-[180deg]"
-              } text-gray-600 group-hover:text-[#3B9DF8] transition-all duration-300`}
-            />
-          </li>
+          
 
-          {/* product mega menu */}
-          <div
-            onClick={() => setMegaMenuSubItemsOpen("more_product")}
-            className={`${
-              isMegaMenuCollapse ? "hidden" : "block"
-            } group font-[500] ml-6`}
-          >
-            <h4 className="text-left flex items-center gap-[5px]">
-              More Products
-              <MdOutlineKeyboardArrowRight className="text-[1.2rem]" />
-            </h4>
-
-            <ul
-              className={`${
-                megaMenuSubItemsOpen === "more_product" ? "flex" : "hidden"
-              } pl-6 mt-3 font-[400] items-start flex-col gap-[10px] text-gray-600`}
-            >
-              <li className="hover:text-[#3B9DF8] transition-all duration-500 cursor-pointer capitalize">
-                Demo App
-              </li>
-              <li className="hover:text-[#3B9DF8] transition-all duration-500 cursor-pointer capitalize">
-                CRM
-              </li>
-              <li className="hover:text-[#3B9DF8] transition-all duration-500 cursor-pointer capitalize">
-                CMS
-              </li>
-            </ul>
-          </div>
-
-          <div
-            onClick={() => setMegaMenuSubItemsOpen("ecosystem")}
-            className={`${
-              isMegaMenuCollapse ? "hidden" : "block"
-            } font-[500] ml-6`}
-          >
-            <h4 className="text-left flex items-center gap-[5px]">
-              Ecosystem
-              <MdOutlineKeyboardArrowRight className="text-[1.2rem]" />
-            </h4>
-
-            <ul
-              className={`${
-                megaMenuSubItemsOpen === "ecosystem" ? "flex" : "hidden"
-              } pl-6 mt-3 font-[400] items-start flex-col gap-[10px] text-gray-600`}
-            >
-              <li className="hover:text-[#3B9DF8] transition-all duration-500 cursor-pointer capitalize">
-                Directory
-              </li>
-              <li className="hover:text-[#3B9DF8] transition-all duration-500 cursor-pointer capitalize">
-                Bookings
-              </li>
-              <li className="hover:text-[#3B9DF8] transition-all duration-500 cursor-pointer capitalize">
-                User feedback
-              </li>
-              <li className="hover:text-[#3B9DF8] transition-all duration-500 cursor-pointer capitalize">
-                Task Manager
-              </li>
-            </ul>
-          </div>
-
-          <li className="hover:text-[#3B9DF8] transition-all duration-500 cursor-poin ter capitalize">
-            Features
-          </li>
-          <li className="hover:text-[#3B9DF8] transition-all duration-500 cursor-pointer capitalize">
-            Support
-          </li>
+          <Link to='home'> 
+          <li className="flex items-center hover:text-[#3B9DF8] group gap-[5px] cursor-pointer">
+          <AiFillHome className="text-[1.1rem] group-hover:text-[#3B9DF8] text-gray-600" />
+          Home
+        </li>
+        </Link>
+        <Link to='cars'> 
+          <li className="flex items-center hover:text-[#3B9DF8] group gap-[5px] cursor-pointer">
+          <FaCar className="text-[1.1rem] group-hover:text-[#3B9DF8] text-gray-600" />
+          All Cars
+        </li>
+        </Link>
         </ul>
       </aside>
     </nav>
