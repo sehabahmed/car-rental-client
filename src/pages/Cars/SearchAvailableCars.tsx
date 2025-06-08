@@ -5,6 +5,7 @@ import {
 } from "../../redux/features/car/carManagement.api";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { useMemo } from "react";
+import { capitalizeWords } from "../../components/utils/CapitalizeWords";
 
 export default function SearchAvailableCars() {
   const [searchParams] = useSearchParams();
@@ -106,7 +107,7 @@ export default function SearchAvailableCars() {
                 </h2>
               </div>
               <div className="text-sm text-gray-600 dark:text-gray-300">
-                <span>📍 {location} • </span>
+                <span>📍 {capitalizeWords(location)}</span>
               </div>
             </div>
             <BsThreeDotsVertical className="text-[#424242] dark:text-[#abc2d3] dark:hover:bg-slate-900/60 rounded-full text-[2.5rem] p-2 hover:bg-[#ececec] cursor-pointer" />
