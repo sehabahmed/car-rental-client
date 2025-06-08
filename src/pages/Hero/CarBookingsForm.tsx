@@ -1,37 +1,43 @@
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import CRForm from "../../components/form/CRForm";
 import CRDatePicker from "../../components/form/CRDatePicker";
-import { useState } from "react";
 import CRTimePicker from "../../components/form/CRTimePicker";
 import CRSelect from "../../components/form/CRSelect";
 import { carLocationOptions } from "../../constants/car";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import dayjs from "dayjs";
 
 const CarBookingsForm = () => {
-      const [selectedDate, setSelectedDate] = useState("");
-      const [searchParams] = useSearchParams();
+      // const [selectedDate, setSelectedDate] = useState("");
+      // const [searchParams] = useSearchParams();
       const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
 
-    if (data.pickupLocation || data.date || data.startTime){
+    if (!data.pickupLocation || !data.pickupDate || !data.startTime){
       toast.error('Please fill in all required fields: Location, Date, and Start Time');
       return;
     }
 
-    const searchQuery = {
-      location: data.location,
-      date: data.date,
-      startTime: data.startTime
-    }
+    // Format date as YYYY-MM-DD
+    const formattedDate = dayjs(data.pickupDate).format('YYYY-MM-DD');
+    
+    // Format time as HH:mm
+    const formattedTime = dayjs(data.startTime).format('HH:mm');
 
-    const params = new URLSearchParams
+    const searchQuery = {
+      location: data.pickupLocation,
+      date: formattedDate,
+      startTime: formattedTime
+    };
+
+    const params = new URLSearchParams();
     params.append('location', searchQuery.location);
     params.append('date', searchQuery.date);
     params.append('startTime', searchQuery.startTime);
 
-    navigate(`/cars/${params.toString()}`);
+    navigate(`/cars/search?${params.toString()}`);
   };
 
   return (
@@ -57,7 +63,7 @@ const CarBookingsForm = () => {
                   options={carLocationOptions}
                   placeholder="Enter Location"
                   className="w-full bg-black/40 border-none rounded-md p-3 text-white placeholder:text-gray-500" 
-                  required
+                  rules={{required: 'Location is required'}}
                 />
               </div>
 
@@ -68,9 +74,8 @@ const CarBookingsForm = () => {
                   <CRDatePicker 
                     name="pickupDate" 
                     placeholder="mm/dd/yyyy"
-                    className="w-full bg-black/40 border-none rounded-md p-3 text-white placeholder:text-gray-500"
-                    required
-                    onChange={(date) => setSelectedDate(date)}
+                  className="w-full bg-black/40 border-none rounded-md p-3 text-white placeholder:text-gray-500"
+                    rules={{required: 'Pickup Date is required'}}
                   />
                   <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -88,7 +93,7 @@ const CarBookingsForm = () => {
                   name="startTime" 
                   label=""
                   className="w-full bg-black/40 border-none rounded-md p-3 text-white placeholder:text-gray-500"
-                  required
+                  rules={{required: 'Select Time is required'}}
                 />
               </div>
               {/* Send Button */}

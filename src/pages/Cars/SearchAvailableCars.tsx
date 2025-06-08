@@ -1,43 +1,56 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { capitalizeWords } from "../../components/utils/CapitalizeWords";
+import { useSearchParams } from "react-router-dom";
 import {
-  useGetAllCarsQuery,
+  useSearchAvailableCarsQuery,
 } from "../../redux/features/car/carManagement.api";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { useMemo } from "react";
 
-export default function AllCars() {
-//   const [searchParams] = useSearchParams();
+export default function SearchAvailableCars() {
+  const [searchParams] = useSearchParams();
 
-//   const location = searchParams.get("location");
-//   const date = searchParams.get("date");
-//   const startTime = searchParams.get("startTime");
+  const location = searchParams.get("location");
+  const date = searchParams.get("date");
+  const startTime = searchParams.get("startTime");
 
-//   const hasSearchParams = location && date && startTime;
+  const hasSearchParams = location && date && startTime;
 
-//   const searchQuery = useMemo(() => {
-//     if (!hasSearchParams) return null;
+  const searchQuery = useMemo(() => {
+    if (!hasSearchParams) return null;
 
-//     return {
-//       location,
-//       date,
-//       startTime,
-//     };
-//   }, [hasSearchParams, location, date, startTime]);
-
-  const {
-    data: allCars,
-    isLoading,
-    error,
-  } = useGetAllCarsQuery(undefined);
-
-  console.log('all cars', allCars?.data);
+    return {
+      location,
+      date,
+      startTime,
+    };
+  }, [hasSearchParams, location, date, startTime]);
 
 //   const {
-//     data: searchResults,
-//     isLoading: isSearchLoading,
-//     error: isSearchError,
-//   } = useSearchAvailableCarsQuery(searchQuery, { skip: !hasSearchParams });
+//     data: allCarsData,
+//     isLoading: isAllCarsLoading,
+//     error: isAllCarsError,
+//   } = useGetAllCarsQuery(undefined, { skip: hasSearchParams });
 
+  const {
+    data: searchResults,
+    isLoading,
+    error,
+  } = useSearchAvailableCarsQuery(searchQuery, { skip: !hasSearchParams });
+
+
+  // Show message if no search parameters
+  if (!hasSearchParams) {
+    return (
+      <div className="w-11/12 mx-auto flex flex-col justify-center items-center h-64">
+        <div className="text-lg text-gray-500 mb-4">
+          Please use the search form to find available cars
+        </div>
+        <div className="text-sm text-gray-400">
+          Location, date, and time are required for search
+        </div>
+      </div>
+    );
+  }
 
   // Loading state
   if (isLoading) {
@@ -60,26 +73,26 @@ export default function AllCars() {
   }
 
   // No cars found
-//   if (!allCars?.data || allCars.data.length === 0) {
-//     return (
-//       <div className="w-11/12 mx-auto flex flex-col justify-center items-center h-64">
-//         <div className="text-lg text-gray-500 mb-4">
-//           No available cars found for your search criteria
-//         </div>
-//         <div className="text-sm text-gray-400 mb-4">
-//           Location: {location} • Date: {new Date(date).toLocaleDateString()} •
-//           Time: {startTime}
-//         </div>
-//         <div className="text-sm text-gray-400">
-//           Try searching with different parameters
-//         </div>
-//       </div>
-//     );
-//   }
+  if (!searchResults?.data || searchResults.data.length === 0) {
+    return (
+      <div className="w-11/12 mx-auto flex flex-col justify-center items-center h-64">
+        <div className="text-lg text-gray-500 mb-4">
+          No available cars found for your search criteria
+        </div>
+        <div className="text-sm text-gray-400 mb-4">
+          Location: {location} • Date: {new Date(date).toLocaleDateString()} •
+          Time: {startTime}
+        </div>
+        <div className="text-sm text-gray-400">
+          Try searching with different parameters
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="w-11/12 mx-auto grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-3">
-      {allCars?.data?.map((car: any) => (
+      {searchResults?.data?.map((car: any) => (
         <div
           key={car._id}
           className="w-full md:w-[70%] shadow-lg dark:bg-slate-800 bg-white rounded"
@@ -88,12 +101,12 @@ export default function AllCars() {
           <div className="flex w-full justify-between items-center p-4">
             <div className="flex  items-center gap-4">
               <div className=" flex flex-col items-center">
-                <h2 className="font-semibold dark:text-[#d2dee7] text-black text-2xl">
+                <h2 className="font-semibold dark:text-[#abc2d3] text-black text-2xl">
                   {car.name}
                 </h2>
               </div>
               <div className="text-sm text-gray-600 dark:text-gray-300">
-                <span>📍 {capitalizeWords(car.location)}</span>
+                <span>📍 {location} • </span>
               </div>
             </div>
             <BsThreeDotsVertical className="text-[#424242] dark:text-[#abc2d3] dark:hover:bg-slate-900/60 rounded-full text-[2.5rem] p-2 hover:bg-[#ececec] cursor-pointer" />

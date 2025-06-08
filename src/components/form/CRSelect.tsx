@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Form, Select } from "antd";
 import { Controller } from "react-hook-form";
 
@@ -9,6 +10,7 @@ type TCRSelectProps = {
   mode?: "multiple" | undefined;
   placeholder?: string;
   className?: string;
+  rules?: any;
 };
 
 const CRSelect = ({
@@ -19,9 +21,11 @@ const CRSelect = ({
   mode,
   placeholder,
   className,
+  rules,
 }: TCRSelectProps) => (
   <Controller
     name={name}
+    rules={rules}
     render={({ field, fieldState: { error } }) => (
       <Form.Item label={label}>
         <Select
