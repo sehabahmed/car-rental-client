@@ -6,23 +6,6 @@ import {
 import { BsThreeDotsVertical } from "react-icons/bs";
 
 export default function AllCars() {
-//   const [searchParams] = useSearchParams();
-
-//   const location = searchParams.get("location");
-//   const date = searchParams.get("date");
-//   const startTime = searchParams.get("startTime");
-
-//   const hasSearchParams = location && date && startTime;
-
-//   const searchQuery = useMemo(() => {
-//     if (!hasSearchParams) return null;
-
-//     return {
-//       location,
-//       date,
-//       startTime,
-//     };
-//   }, [hasSearchParams, location, date, startTime]);
 
   const {
     data: allCars,
@@ -30,14 +13,7 @@ export default function AllCars() {
     error,
   } = useGetAllCarsQuery(undefined);
 
-  console.log('all cars', allCars?.data);
-
-//   const {
-//     data: searchResults,
-//     isLoading: isSearchLoading,
-//     error: isSearchError,
-//   } = useSearchAvailableCarsQuery(searchQuery, { skip: !hasSearchParams });
-
+  console.log('all cars', allCars);
 
   // Loading state
   if (isLoading) {
@@ -58,24 +34,6 @@ export default function AllCars() {
       </div>
     );
   }
-
-  // No cars found
-//   if (!allCars?.data || allCars.data.length === 0) {
-//     return (
-//       <div className="w-11/12 mx-auto flex flex-col justify-center items-center h-64">
-//         <div className="text-lg text-gray-500 mb-4">
-//           No available cars found for your search criteria
-//         </div>
-//         <div className="text-sm text-gray-400 mb-4">
-//           Location: {location} • Date: {new Date(date).toLocaleDateString()} •
-//           Time: {startTime}
-//         </div>
-//         <div className="text-sm text-gray-400">
-//           Try searching with different parameters
-//         </div>
-//       </div>
-//     );
-//   }
 
   return (
     <div className="w-11/12 mx-auto grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-3">

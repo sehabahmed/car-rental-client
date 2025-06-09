@@ -1,45 +1,39 @@
 import { useState } from "react";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { IoIosArrowUp } from "react-icons/io";
 import { TbLogout2 } from "react-icons/tb";
 import { CiMenuFries } from "react-icons/ci";
-import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { AiFillHome } from "react-icons/ai";
-import { BiSupport } from "react-icons/bi";
 import { FiUser } from "react-icons/fi";
 import { IoSettingsOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { FaCar } from "react-icons/fa6";
 
-
-
 const Header = () => {
   const [accountMenuOpen, setAccountMenuOpen] = useState(false);
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
-  const [isMegaMenuCollapse, setIsMegaMenuCollapse] = useState(false);
-  const [megaMenuSubItemsOpen, setMegaMenuSubItemsOpen] = useState("");
 
   return (
     <nav className="flex items-center justify-between w-11/12 mx-auto my-3 relative">
       {/* logo */}
       <img
-        src="https://i.ibb.co/0BZfPq6/darklogo.png"
+        src="https://img.freepik.com/premium-vector/cr-logo-design_705304-143.jpg"
         alt="logo"
-        className="w-[55px] "
+        className="w-[75px] "
       />
 
       {/* nav links */}
       <ul className="items-center gap-[20px] text-[1rem] text-[#424242] md:flex hidden">
-        <Link to='home'> 
+        <Link to="home">
           <li className="flex items-center hover:text-[#3B9DF8] group gap-[5px] cursor-pointer">
-          <AiFillHome className="text-[1.1rem] group-hover:text-[#3B9DF8] text-gray-600" />
-          Home
-        </li>
+            <AiFillHome className="text-[1.1rem] group-hover:text-[#3B9DF8] text-gray-600" />
+            Home
+          </li>
         </Link>
-        <Link to='cars'> 
+        <Link to="cars">
           <li className="flex items-center hover:text-[#3B9DF8] group gap-[5px] cursor-pointer">
-          <FaCar className="text-[1.1rem] group-hover:text-[#3B9DF8] text-gray-600" />
-          All Cars
-        </li>
+            <FaCar className="text-[1.1rem] group-hover:text-[#3B9DF8] text-gray-600" />
+            All Cars
+          </li>
         </Link>
       </ul>
 
@@ -112,20 +106,18 @@ const Header = () => {
         } md:hidden bg-white p-4 text-center absolute top-[55px] right-0 sm:w-[300px] w-full rounded-md transition-all duration-300`}
       >
         <ul className="items-start gap-[20px] text-[1rem] text-gray-600 flex flex-col">
-          
-
-          <Link to='home'> 
-          <li className="flex items-center hover:text-[#3B9DF8] group gap-[5px] cursor-pointer">
-          <AiFillHome className="text-[1.1rem] group-hover:text-[#3B9DF8] text-gray-600" />
-          Home
-        </li>
-        </Link>
-        <Link to='cars'> 
-          <li className="flex items-center hover:text-[#3B9DF8] group gap-[5px] cursor-pointer">
-          <FaCar className="text-[1.1rem] group-hover:text-[#3B9DF8] text-gray-600" />
-          All Cars
-        </li>
-        </Link>
+          <Link to="home">
+            <li className="flex items-center hover:text-[#3B9DF8] group gap-[5px] cursor-pointer">
+              <AiFillHome className="text-[1.1rem] group-hover:text-[#3B9DF8] text-gray-600" />
+              Home
+            </li>
+          </Link>
+          <Link to="cars">
+            <li className="flex items-center hover:text-[#3B9DF8] group gap-[5px] cursor-pointer">
+              <FaCar className="text-[1.1rem] group-hover:text-[#3B9DF8] text-gray-600" />
+              All Cars
+            </li>
+          </Link>
         </ul>
       </aside>
     </nav>
